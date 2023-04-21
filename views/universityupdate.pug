@@ -1,0 +1,45 @@
+extends layout 
+ 
+block content 
+  h1= title
+  if(toShow==null)
+    h2 No instance to Detail
+  else
+  - let universityid = toShow._id 
+  - let universityname = toShow.universityname 
+  - let departmentname = toShow.departmentname 
+  - let score = toShow.score 
+   
+  div.row(class='mb-2') 
+    div.mr-1 ID is 
+    div #{universityid} 
+  - let actionid = "/resource/university/" + universityid 
+  form(id='universityForm', action= actionid, method="PUT") 
+    div.form-group 
+        label.universityAttr(for='universityname')  universityname 
+        input#universityname(type='text', name='universityname', value= universityname ) 
+    div.form-group 
+        label.universityAttr(for='score')  score 
+        input#score(type='text', name='score', value= score ) 
+    div.form-group 
+        label.universityAttr(for='departmentname')  departmentname 
+        input#departmentname(type='text', name='departmentname', value= departmentname ) 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['universityForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'PUT', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Update succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Update failed " + error ) 
+      }); 
+    }); 

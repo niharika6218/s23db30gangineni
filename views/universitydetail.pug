@@ -1,0 +1,20 @@
+extends layout
+block content
+ h1= title
+ - let universityid = toShow._id
+ - let universityname = toShow.universityname
+ - let departmentname = toShow.departmentname
+ - let score = toShow.score
+ div
+ div.row
+ div(class='universityAttr mr-3') university ID is:
+ div #{universityid}
+ div.row
+ div(class='universityAttr mr-3') university Type is:
+ div #{universityname}
+ div.row
+ div(class='universityAttr mr-3') university Size is:
+ div #{score}
+ div.row
+ div(class='universityAttr mr-3') university Cost is:
+ div #{departmentname}

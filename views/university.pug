@@ -2,16 +2,20 @@ extends layout
 
 block content
   h1= title
-  - var results = [{universityname:"VIT", departmentname: "computerscience", score:83}, {universityname:"SRM", departmentname: "electronics", score:85},{universityname:"KLU", departmentname: "Mechanical", score:90}]
-  div(class="container-fluid") 
-  div(class="row")
-  -
-  each item,index in results
-    div(class='col-sm-2' onclick=`buy(${index})`) #{item.universityname} - #{item.departmentname} - #{item.score}
-    script.
-        function buy(i)
-        {
-            alert(`You purchased item ${i+1}`)
-        }
+  - let items = results;
+  div(class="container-fluid")
+    div(class="row")
+      each item,index in items
+        - let destination = `dispatch(\"/university/update?id=${item._id}\")`
+        div(class="col-sm-2" class="m-1")
+          h3 #{item.universityname}
+          p #{item.departmentname}
+          p #{item.score}
+          button.btn( class="btn-primary ml-1", onclick= destination) Update
+  script.
+    function dispatch(path){
+      console.log(path);
+      window.location.href=path;
+    }
 
 
