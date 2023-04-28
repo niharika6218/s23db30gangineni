@@ -67,8 +67,8 @@ ${JSON.stringify(req.body)}`)
  // Do updates of properties
  if(req.body.universityname)
  toUpdate.universityname = req.body.universityname;
- if(req.body.departmentname) toUpdate.cost = req.body.departmentname;
- if(req.body.score) toUpdate.size = req.body.score;
+ if(req.body.departmentname) toUpdate.departmentname = req.body.departmentname;
+ if(req.body.score) toUpdate.score = req.body.score;
  let result = await toUpdate.save();
  console.log("Sucess " + result)
  res.send(result)
